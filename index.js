@@ -29,12 +29,13 @@ module.exports = class {
         let result;
         switch (entry.type) {
             case 'singleton': {
-                if (!this.cachedSingletons[name]) {
-                    this.cachedSingletons[name] =
+                const singletonKey = JSON.stringify([name, args]);
+                if (!this.cachedSingletons[singletonKey]) {
+                    this.cachedSingletons[singletonKey] =
                             evaluate(this, entry.factory, args);
                 }
                 
-                result = this.cachedSingletons[name];
+                result = this.cachedSingletons[singletonKey];
                 
                 break;
             }
